@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="imagen" />
+</body>
+</html>
+<script>
+    function exito(){
+        console.log(this.responseText)
+
+        var datos = JSON.parse(this.responseText)
+        console.log(datos.sprites.front_default)
+        const imagen = document.querySelector('#imagen')
+        imagen.src = datos.sprites.front_default
+    }
+
+    function error(err){
+        console.log("Error", err)
+    }
+
+    var o = new XMLHttpRequest();
+    o.onload = exito
+    o.onerror = error
+    o.open('GET', 'https://pokeapi.co/api/v2/pokemon/100')
+
+    o.send()
+</script>
